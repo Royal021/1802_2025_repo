@@ -1,22 +1,23 @@
-[gd_scene load_steps=8 format=3 uid="uid://6kx7i82xb5mm"]
+[gd_scene load_steps=9 format=3 uid="uid://6kx7i82xb5mm"]
 
 [ext_resource type="Script" path="res://scripts/main_scene/main_scene.gd" id="1_7ifj8"]
 [ext_resource type="Script" path="res://scripts/main_scene/control.gd" id="2_ycl1w"]
+[ext_resource type="Texture2D" uid="uid://cxchugwsk16f" path="res://scripts/main_scene/kloofendal_48d_partly_cloudy_puresky_4k.exr" id="3_t1bxw"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_2dc0v"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gqge0"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ox7nm"]
-sky_top_color = Color(1, 0.454902, 0.54902, 1)
-sky_horizon_color = Color(0.498039, 0.654902, 0.670588, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_krxiq"]
+panorama = ExtResource("3_t1bxw")
 
-[sub_resource type="Sky" id="Sky_t43m8"]
-sky_material = SubResource("ProceduralSkyMaterial_ox7nm")
+[sub_resource type="Sky" id="Sky_6pm0j"]
+sky_material = SubResource("PanoramaSkyMaterial_krxiq")
 
-[sub_resource type="Environment" id="Environment_w5j1k"]
+[sub_resource type="Environment" id="Environment_8pbc6"]
 background_mode = 2
-sky = SubResource("Sky_t43m8")
+sky = SubResource("Sky_6pm0j")
+reflected_light_source = 2
 
 [node name="Node3D" type="Node3D"]
 process_mode = 1
@@ -29,9 +30,6 @@ mesh = SubResource("SphereMesh_2dc0v")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 shape = SubResource("SphereShape3D_gqge0")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_w5j1k")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.848593, 0.529046, 0, -0.529046, 0.848593, 0, 1.72018, 3.15498)
@@ -53,3 +51,15 @@ offset_right = 40.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 200
 text = "Booooo"
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Booooo"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8pbc6")
