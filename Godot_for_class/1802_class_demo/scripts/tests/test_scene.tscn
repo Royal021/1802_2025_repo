@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://dx2m7ux5qm45k"]
+
+[ext_resource type="PackedScene" uid="uid://cawlvipu0ln4" path="res://scripts/goblin_character/goblin.tscn" id="1_vjqtq"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vrsts"]
+sky_top_color = Color(0, 0.454902, 0.54902, 1)
+sky_horizon_color = Color(1, 0.654902, 0.670588, 1)
+
+[sub_resource type="Sky" id="Sky_18oop"]
+sky_material = SubResource("ProceduralSkyMaterial_vrsts")
+
+[sub_resource type="Environment" id="Environment_jlpx8"]
+background_mode = 2
+sky = SubResource("Sky_18oop")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_belq5"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cm34i"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_t7d4o"]
+material = SubResource("StandardMaterial3D_cm34i")
+size = Vector3(50, 1, 50)
+
+[node name="test_scene" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jlpx8")
+
+[node name="ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+collision_layer = 2
+collision_mask = 13
+
+[node name="ground_collision" type="CollisionShape3D" parent="ground"]
+shape = SubResource("BoxShape3D_belq5")
+
+[node name="ground_mesh" type="MeshInstance3D" parent="ground"]
+mesh = SubResource("BoxMesh_t7d4o")
+
+[node name="goblin_root" parent="." instance=ExtResource("1_vjqtq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="projectile_container" type="Node3D" parent="."]
