@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfop0bvkgeugv"]
+
+[ext_resource type="Script" path="res://scripts/tests/pillar.gd" id="1_ja1x5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gveod"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_887xn"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h4f7d"]
+material = SubResource("StandardMaterial3D_887xn")
+size = Vector3(1, 2, 1)
+
+[node name="pillar" type="Area3D"]
+collision_layer = 2
+collision_mask = 15
+script = ExtResource("1_ja1x5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_gveod")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_h4f7d")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
