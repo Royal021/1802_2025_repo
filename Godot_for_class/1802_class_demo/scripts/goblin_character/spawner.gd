@@ -1,8 +1,7 @@
-extends RigidBody3D
+extends Area3D
 
-var damage = 10
 
-var lifetime = 10
+var can_spawn = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,6 +10,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if lifetime <= 0:
-		self.free()
-	lifetime -= delta
+	pass

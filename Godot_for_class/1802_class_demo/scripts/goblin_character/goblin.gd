@@ -10,7 +10,11 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
+		
+	if Input.is_action_pressed("rotate_left"):
+		self.rotate(Vector3(0,1,0), 10 * delta)
+	if Input.is_action_pressed("rotate_right"):
+		self.rotate(Vector3(0,1,0), -10 * delta)	
 	# Handle jump.
 	#if Input.is_action_just_pressed("jump") and is_on_floor():
 	#	velocity.y = JUMP_VELOCITY

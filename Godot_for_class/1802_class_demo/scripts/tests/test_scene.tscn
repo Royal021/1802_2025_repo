@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dx2m7ux5qm45k"]
+[gd_scene load_steps=11 format=3 uid="uid://dx2m7ux5qm45k"]
 
 [ext_resource type="Script" path="res://scripts/tests/test_scene.gd" id="1_m5xoo"]
 [ext_resource type="PackedScene" uid="uid://cawlvipu0ln4" path="res://scripts/goblin_character/goblin.tscn" id="1_vjqtq"]
-[ext_resource type="PackedScene" uid="uid://dfop0bvkgeugv" path="res://scripts/tests/pillar.tscn" id="3_ka5um"]
+[ext_resource type="PackedScene" uid="uid://dyso5oeej8eoh" path="res://scripts/tests/ui_root.tscn" id="3_7vpjr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vrsts"]
 sky_top_color = Color(0, 0.454902, 0.54902, 1)
@@ -24,11 +24,11 @@ size = Vector3(50, 1, 50)
 material = SubResource("StandardMaterial3D_cm34i")
 size = Vector3(50, 1, 50)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_gb41o"]
+size = Vector3(50, 1, 50)
+
 [node name="test_scene" type="Node3D"]
 script = ExtResource("1_m5xoo")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jlpx8")
@@ -49,5 +49,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 
 [node name="projectile_container" type="Node3D" parent="."]
 
-[node name="pillar" parent="." instance=ExtResource("3_ka5um")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0477848, 0, 4.07409)
+[node name="ui_root" parent="." instance=ExtResource("3_7vpjr")]
+
+[node name="play_area" type="Area3D" parent="."]
+
+[node name="play_area_collision" type="CollisionShape3D" parent="play_area"]
+shape = SubResource("BoxShape3D_gb41o")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
+
+[node name="enemy_list" type="Node3D" parent="."]
+
+[connection signal="area_entered" from="play_area" to="." method="_on_play_area_area_entered"]
+[connection signal="area_exited" from="play_area" to="." method="_on_play_area_area_exited"]

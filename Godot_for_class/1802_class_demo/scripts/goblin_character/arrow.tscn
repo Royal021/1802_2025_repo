@@ -13,6 +13,7 @@ material = SubResource("StandardMaterial3D_ds0bq")
 size = Vector3(0.6, 1.255, 0.41)
 
 [node name="RigidBody3D" type="RigidBody3D" groups=["projectile"]]
+collision_mask = 10
 gravity_scale = 0.0
 script = ExtResource("1_5ix8i")
 

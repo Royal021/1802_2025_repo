@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cawlvipu0ln4"]
+[gd_scene load_steps=10 format=3 uid="uid://cawlvipu0ln4"]
 
 [ext_resource type="Script" path="res://scripts/goblin_character/goblin.gd" id="1_gf37t"]
 [ext_resource type="Material" uid="uid://dv53pkmoam04g" path="res://assets/materials/goblin.tres" id="1_urkkn"]
+[ext_resource type="PackedScene" uid="uid://3clmft27x734" path="res://scripts/goblin_character/spawner.tscn" id="3_p64ys"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n1ro7"]
 size = Vector3(0.9, 2, 0.9)
@@ -28,7 +29,7 @@ top_radius = 0.001
 bottom_radius = 0.1
 height = 1.0
 
-[node name="goblin_root" type="CharacterBody3D"]
+[node name="goblin_root" type="CharacterBody3D" groups=["player"]]
 collision_mask = 14
 script = ExtResource("1_gf37t")
 
@@ -59,3 +60,16 @@ mesh = SubResource("CylinderMesh_bqhl1")
 
 [node name="arrow_container" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.975522, 0.8)
+
+[node name="spawner_container" type="Node3D" parent="."]
+
+[node name="spawner_pos_z" parent="spawner_container" instance=ExtResource("3_p64ys")]
+
+[node name="spawner_neg_z" parent="spawner_container" instance=ExtResource("3_p64ys")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
+
+[node name="spawner_pos_x" parent="spawner_container" instance=ExtResource("3_p64ys")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0)
+
+[node name="spawner_neg_x" parent="spawner_container" instance=ExtResource("3_p64ys")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 0)
