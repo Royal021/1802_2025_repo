@@ -12,3 +12,7 @@ func _ready():
 func _process(delta):
 	$MarginContainer/VBoxContainer/HBoxContainer/health_label.text = "HP: " + str(MyGlobals.player_health)
 	$MarginContainer/VBoxContainer/HBoxContainer/score_label.text = "Score: " + str(MyGlobals.player_score)
+
+
+func _on_button_button_down():
+	get_tree().quit()

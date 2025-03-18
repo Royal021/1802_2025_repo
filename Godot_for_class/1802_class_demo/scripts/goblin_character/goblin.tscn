@@ -64,9 +64,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.975522, 0.8)
 [node name="spawner_container" type="Node3D" parent="."]
 
 [node name="spawner_pos_z" parent="spawner_container" instance=ExtResource("3_p64ys")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15)
 
 [node name="spawner_neg_z" parent="spawner_container" instance=ExtResource("3_p64ys")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15)
 
 [node name="spawner_pos_x" parent="spawner_container" instance=ExtResource("3_p64ys")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0)

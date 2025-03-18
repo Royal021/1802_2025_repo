@@ -15,6 +15,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if MyGlobals.player_health <= 0:
+		quit_game()
+	
 	if Input.is_action_just_pressed("attack"):
 		var new_arrow = arrow_premade.instantiate()
 		$projectile_container.add_child(new_arrow)
@@ -57,3 +60,34 @@ func _on_play_area_area_exited(area):
 func _on_play_area_area_entered(area):
 	if area.is_in_group("spawner"):
 		area.can_spawn = true
+		
+		
+func save_to_file(content):
+	var file = FileAccess.open("res://save_game.txt", FileAccess.WRITE)
+	file.store_string(content)
+
+func load_from_file():
+	check_for_high_score_file("res://")
+	var file = FileAccess.open("res://save_game.txt", FileAccess.READ)
+	var content = file.get_as_text()
+	return content
+	
+func quit_game():
+	var prev_high_score = load_from_file()
+	if int(prev_high_score) < MyGlobals.player_score:
+		save_to_file(str(MyGlobals.player_score))
+	get_tree().quit()
+
+func check_for_high_score_file(path):
+	var dir = DirAccess.open(path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if file_name == "save_game.txt":
+				return
+			file_name = dir.get_next()
+	else:
+		print("no directory here")
+	save_to_file(str(0))
+	return
